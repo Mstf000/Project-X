@@ -1,0 +1,12 @@
+Step 1: Define the Core Features and Requirements
+1. Core Features:
+Drag-and-drop interface for coding
+Different programming environments (React, Angular, Vue.js, Django)
+Project-based learning with guided challenges
+Real-time feedback system
+Level progression system with titles and avatar borders
+2. Technical Requirements:
+Web-based application
+Front-end development (HTML, CSS, JavaScript)
+Backend development (Node.js, Python for coding simulation)
+Database for storing user progress and data
