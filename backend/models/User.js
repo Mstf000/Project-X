@@ -10,6 +10,8 @@ const UserSchema = new mongoose.Schema({
         eyes: String,
         face: String,
     },
+    currentLevel: { type: Number, default: 1 },
+    experiencePoints: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('User', UserSchema);
