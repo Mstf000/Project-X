@@ -1,97 +1,59 @@
-html,
-body {
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+
+* {
     margin: 0;
-    background: #596886;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: "Roboto Mono", monospace;
+    background: #111;
+    width: 100%;
+    overflow: hidden;
 }
 
-form {
-    margin-bottom: 20%;
-}
-
-input,
-select {
-    text-align: center;
-    border-radius: 20px;
-    display: flex;
-    min-height: 50px;
-    min-width: 300px;
-    color: #ffd5af;
-    background: linear-gradient(to right, #ffd5af 50%, #052b4a 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    transition: all 0.5s ease;
-    border-style: solid;
-    border-color: #ffd5af;
-}
-
-input::placeholder,
-select::placeholder {
-    color: #ffd5af;
-}
-
-input:focus,
-select:focus {
-    background-color: #ffd5af;
-    color: #052b4a;
-    background-position: left bottom;
-    outline: none;
-}
-
-i {
-    color: #ffd5af;
-    position: absolute;
-    padding: 18px 20px 10px;
-    font-size: larger;
-}
-
-.field {
-    margin: 20px;
+.ring {
     position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-button {
-    font-size: large;
-    padding: 15px 100px 15px;
-    border-radius: 30px;
-    border: 1px solid #ffd5af;
-    background: #052b4a;
-    color: #ffd5af;
-    cursor: pointer;
-    outline: none;
-    transform: scaleX(1);
-    transition: 0.5s all ease;
+.ring i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
 }
 
-.loading {
-    padding: 15px 50px 15px;
-    background: #ffd5af;
-    color: #052b4a;
+.ring i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
 }
 
-.submit-button {
-    text-align: center;
-    padding-top: 60px;
+.ring i:nth-child(2) {
+    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
 }
 
-svg {
-    margin-left: 20px;
+.ring i:nth-child(3) {
+    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
 }
 
-.spinner {
-    border: 6px solid #052b4a;
-    border-top: 6px solid #596886;
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    animation: spin 1.5s linear infinite;
+.ring:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
 }
 
-@keyframes spin {
+@keyframes animate {
     0% {
         transform: rotate(0deg);
     }
@@ -99,4 +61,74 @@ svg {
     100% {
         transform: rotate(360deg);
     }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.login {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login h2 {
+    font-size: 2em;
+    color: #fff;
+}
+
+.login .inputBx {
+    position: relative;
+    width: 100%;
+}
+
+.login .inputBx input {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+}
+
+.login .inputBx input[type="submit"] {
+    width: 100%;
+    background: #0078ff;
+    background: linear-gradient(45deg, #ff357a, #fff172);
+    border: none;
+    cursor: pointer;
+}
+
+.login .inputBx input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.login .links {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.login .links a {
+    color: #fff;
+    text-decoration: none;
 }

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+body {
+    font-size: 16px;
+}
+
+#canvas {
+    display: block;
+    background: linear-gradient(to left, #f6f9fc, #fcfcfc);
+}
+
+.title {
+    margin-top: 50px;
+    line-height: 1.5;
+    text-align: center;
+    font-size: 1.6em;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #777;
+}
+
+.hint {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #aaa;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8em;
+}
+
+#drop-zone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: 5px;
+    pointer-events: none;
+}
+
+.success-callback {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-bottom: 50px;
+    pointer-events: none;
+}
+
+.success-callback .title,
+.success-callback button {
+    position: relative;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.success-callback.show {
+    pointer-events: auto;
+}
+
+.success-callback.show .title {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.3s all ease;
+}
+
+.success-callback.show button {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.3s all ease 0.15s;
+}
+
+.success-callback .title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.success-callback button {
+    background: #e60012;
+    color: #fff;
+    font-weight: 400;
+    padding: 15px 20px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.success-callback button:hover {
+    background: #ff3b30;
+}

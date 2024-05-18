@@ -24,41 +24,42 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <form onSubmit={onSubmit}>
-                <svg width="317.5px" height="121.4px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 317.5 121.4" style={{ background: '#596886' }} preserveAspectRatio="xMidYMid">
-                    <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="#ffd5af" fontSize="24" fontFamily="Arial, sans-serif">
-                        Project X
-                    </text>
-                </svg>
-                <div className="field">
-                    <i className="icon-envelope"></i>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        name="username"
-                        value={username}
-                        onChange={onChange}
-                        className="input"
-                        required
-                    />
+        <div className="ring">
+            <i style={{ '--clr': '#00ff0a' }}></i>
+            <i style={{ '--clr': '#ff0057' }}></i>
+            <i style={{ '--clr': '#fffd44' }}></i>
+            <div className="login">
+                <h2>Login</h2>
+                <form onSubmit={onSubmit}>
+                    <div className="inputBx">
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            name="username"
+                            value={username}
+                            onChange={onChange}
+                            required
+                        />
+                    </div>
+                    <div className="inputBx">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={password}
+                            onChange={onChange}
+                            required
+                        />
+                    </div>
+                    <div className="inputBx">
+                        <input type="submit" value="Sign in" />
+                    </div>
+                </form>
+                <div className="links">
+                    <a href="#">Forget Password</a>
+                    <a href="#">Signup</a>
                 </div>
-                <div className="field">
-                    <i className="icon-lock"></i>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={password}
-                        onChange={onChange}
-                        className="input"
-                        required
-                    />
-                </div>
-                <div className="submit-button">
-                    <button type="submit" className="button">Login</button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };
