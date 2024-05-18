@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.css';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
+        confirmPassword: '',
         level: '',
         avatar: {
             gender: '',
@@ -15,12 +18,19 @@ const Register = () => {
         },
     });
     const [loading, setLoading] = useState(false);
+    const [usernameAvailable, setUsernameAvailable] = useState(true);
 
-    const { username, password, level, avatar } = formData;
+    const navigate = useNavigate();
+
+    const { username, password, confirmPassword, level, avatar } = formData;
 
     const onChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        console.log('Form Data:', formData);
+
+        // Check username availability when username changes
+        if (e.target.name === 'username') {
+            checkUsernameAvailability(e.target.value);
+        }
     };
 
     const onAvatarChange = (e) => {
@@ -28,18 +38,69 @@ const Register = () => {
             ...formData,
             avatar: { ...avatar, [e.target.name]: e.target.value },
         });
-        console.log('Avatar Data:', avatar);
+    };
+
+    const checkUsernameAvailability = async (username) => {
+        try {
+            const res = await axios.post('http://localhost:5000/api/auth/check-username', { username });
+            setUsernameAvailable(res.data.available);
+        } catch (err) {
+            console.error('Error checking username:', err.response.data);
+        }
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Passwords do not match',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false
+            });
+            setLoading(false);
+            return;
+        }
+
+        if (!usernameAvailable) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Username is already taken',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false
+            });
+            setLoading(false);
+            return;
+        }
+
         setLoading(true);
         try {
-            console.log('Submitting form data:', formData);
-            const res = await axios.post('http://localhost:5000/api/auth/register', formData);
-            console.log('Response:', res.data);
+            const res = await axios.post('http://localhost:5000/api/auth/register', {
+                username,
+                password,
+                level,
+                avatar
+            });
+            Swal.fire({
+                title: 'Success!',
+                text: 'Registration successful',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => {
+                navigate('/login');
+            });
         } catch (err) {
             console.error('Error:', err.response.data);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Username is already taken',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false
+            });
         }
         setLoading(false);
     };
@@ -54,36 +115,19 @@ const Register = () => {
                 <form onSubmit={onSubmit}>
                     <div className="inputBx">
                         <input type="text" name="username" placeholder="Username" value={username} onChange={onChange} required />
+                        {!usernameAvailable && <span className="error">Username is already taken</span>}
                     </div>
                     <div className="inputBx">
                         <input type="password" name="password" placeholder="Password" value={password} onChange={onChange} required />
                     </div>
                     <div className="inputBx">
-                        <select name="level" value={level} onChange={onChange}>
-                            <option value="" disabled>Select Level</option>
-                            <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="advanced">Advanced</option>
-                        </select>
+                        <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} onChange={onChange} required />
                     </div>
                     <div className="inputBx">
-                        <select name="gender" value={avatar.gender} onChange={onAvatarChange}>
-                            <option value="" disabled>Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
+                        <input type="submit" value="Register" />
                     </div>
-                    <div className="inputBx">
-                        <input type="text" name="hair" placeholder="Hair" value={avatar.hair} onChange={onAvatarChange} />
-                    </div>
-                    <div className="inputBx">
-                        <input type="text" name="eyes" placeholder="Eyes" value={avatar.eyes} onChange={onAvatarChange} />
-                    </div>
-                    <div className="inputBx">
-                        <input type="text" name="face" placeholder="Face" value={avatar.face} onChange={onAvatarChange} />
-                    </div>
-                    <div className="inputBx">
-                        <button type="submit">{loading ? <div className="spinner"></div> : 'Register'}</button>
+                    <div className="links">
+                        <a href="login">Sign in</a>
                     </div>
                 </form>
             </div>
