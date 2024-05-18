@@ -1,10 +1,10 @@
-// src/components/ProjectList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './homepage.css';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -20,6 +20,10 @@ const ProjectList = () => {
     }, []);
 
     useEffect(() => {
+        // Retrieve username from local storage
+        const storedUsername = localStorage.getItem('username');
+        setUsername(storedUsername);
+
         // JavaScript to filter birds
         const filterBirds = () => {
             let selectedBirdTypeRadio = document.querySelector("input[type=radio][name=type]:checked");
@@ -59,45 +63,45 @@ const ProjectList = () => {
         };
     }, []);
 
-
     return (
         <div>
+            <h1>Hello, {username}</h1> {/* Display the username */}
             <h1>Project <span>X</span></h1>
             <div data-layout="content list-filters">
                 <form action="." method="GET" data-form="bird-filters">
                     <div data-section="options">
                         <fieldset data-set="bird-type">
-                            <legend data-heading>Type of Bird</legend>
+                            <legend data-heading>Difficulity</legend>
                             <div data-fieldstyle="inline button">
                                 <div data-radio-type="oddbird">
                                     <input data-radio="input" type="radio" name="type" value="odd" id="type_1" />
                                     <label htmlFor="type_1" data-radio="option">
-                                        <span className="label-text">OddBirds</span>
+                                        <span className="label-text">Easy</span>
                                     </label>
                                 </div>
                                 <div data-radio-type="allbirds">
                                     <input data-radio="input" type="radio" name="type" value="All" id="type_2" defaultChecked />
                                     <label htmlFor="type_2" data-radio="option">
-                                        <span className="label-text">All Birds</span>
+                                        <span className="label-text">Hard</span>
                                     </label>
                                 </div>
                             </div>
                         </fieldset>
 
                         <fieldset>
-                            <legend data-heading>Bird Size</legend>
+                            <legend data-heading>Type</legend>
                             <div data-fieldstyle="checkbox list">
                                 <label htmlFor="small">
                                     <input type="checkbox" name="size" value="small" id="small" />
-                                    Small
+                                    Cin'>>'
                                 </label>
                                 <label htmlFor="medium">
                                     <input type="checkbox" name="size" value="medium" id="medium" />
-                                    Medium
+                                    For / While loop
                                 </label>
                                 <label htmlFor="large">
                                     <input type="checkbox" name="size" value="large" id="large" />
-                                    Large
+                                    Arrays
                                 </label>
                             </div>
                         </fieldset>
