@@ -1,0 +1,154 @@
+/* CSS from the provided SCSS */
+[data-set="bird-type"] {
+    /* Step 1. uncomment below to see the collapse */
+    /* container-type: inline-size; */
+}
+
+/* Filters */
+[data-form~="bird-filters"] {
+    column-gap: 2rem;
+    display: grid;
+    grid-template: "options results" auto / var(--col-width, auto) 1fr;
+
+    /* Step 2. uncomment below to add explicit size for container to work */
+    /* --col-width: 10ch; */
+
+    /* @media (min-width: 40rem) {
+      --col-width: minmax(18ch, 20ch);
+    } */
+}
+
+[data-section~="options"] {
+    grid-area: options;
+}
+
+[data-section~="results"] {
+    grid-area: results;
+}
+
+[data-list~="birds"] {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+
+    @media (min-width: 40rem) {
+        grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    }
+}
+
+[data-fieldstyle="inline image"] {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+[data-fieldstyle="inline button"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+[data-fieldstyle="checkbox list"] {
+    display: grid;
+    row-gap: 0.5rem;
+}
+
+/* Styles for fun */
+body,
+button {
+    font-family: "Kanit", sans-serif;
+}
+
+body {
+    background-color: lch(90 14.94 216.45 / 0.97);
+    padding: 2rem;
+}
+
+h1 {
+    font-size: calc(2rem + 3vw);
+    margin-block: 0 1rem;
+}
+
+h1 span {
+    color: lch(66 80 28);
+    font-family: "Norican", cursive;
+    font-weight: 900;
+}
+
+[data-heading] {
+    color: lch(27 43 292);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+[data-radio="input"] {
+    appearance: none;
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: inset(1px 1px 1px 1px);
+    clip-path: inset(1px 1px 1px 1px);
+    height: 1px;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    width: 1px;
+}
+
+[data-fieldstyle~="button"] label {
+    align-items: center;
+    background-color: var(--label-bg, transparent);
+    border: thin solid var(--label-border, lch(27 43 292));
+    color: var(--label-fg, lch(27 43 292));
+    display: inline-flex;
+    justify-content: center;
+    padding: 0.25rem 1rem;
+}
+
+[data-fieldstyle~="button"] label:hover {
+    --label-bg: white;
+    --label-border: lch(27 43 292);
+    --label-fg: lch(27 43 292);
+}
+
+[data-radio="input"]:checked+label {
+    --label-bg: lch(27 43 292);
+    --label-fg: white;
+}
+
+[data-item~="bird"] {
+    background: white;
+    color: lch(27 43 292);
+    font-weight: bold;
+    padding: 0.125rem 0.125rem 0.5rem;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: var(--bird-position, center);
+    margin-block-end: 0.25rem;
+    width: 100%;
+}
+
+[data-bird="parrot"] {
+    --bird-position: top;
+}
+
+legend {
+    margin-block-end: 0.5rem;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0 0 2rem;
+}
+
+label {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
